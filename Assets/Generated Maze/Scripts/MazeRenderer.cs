@@ -1,32 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour
 {
 
-    [SerializeField]
-    [Range(1, 50)]
-    private int width = 10;
+    [SerializeField, Range(1, 50)] private int width = 10;
+    [SerializeField, Range(1, 50)] private int height = 10;
+    [SerializeField] private float size = 1f;
+    [SerializeField] private Transform wallPrefab = null;
+    [SerializeField] private Transform floorPrefab = null;
 
-    [SerializeField]
-    [Range(1, 50)]
-    private int height = 10;
-
-    [SerializeField]
-    private float size = 1f;
-
-    [SerializeField]
-    private Transform wallPrefab = null;
-
-    [SerializeField]
-    private Transform floorPrefab = null;
 
     // Start is called before the first frame update
     void Start()
     {
         var maze = MazeGenerator.Generate(width, height);
         Draw(maze);
+        // ai will spawn and bake the pathing.
+
+        // but I need to create an objective.
     }
 
     private void Draw(WallState[,] maze)
@@ -80,12 +71,5 @@ public class MazeRenderer : MonoBehaviour
             }
 
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
