@@ -4,27 +4,15 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    enum Doors
-    {
-        Empty,
-        Door,
-        Door2,
-        Door3
-    }
-
     [SerializeField] GameObject door;
-    [SerializeField] bool isOpened = false;
 
-    void Update()
-    {
-        
-    }
+    [SerializeField] bool isOpened = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if(!isOpened)
         {
-            isOpened = true;
+            door.transform.position += new Vector3(0, 4, 0);
         }
     }
 }
