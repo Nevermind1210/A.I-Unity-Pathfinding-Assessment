@@ -12,6 +12,4 @@ public class Waypoint : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 0.1f);
     }
-
-
 }

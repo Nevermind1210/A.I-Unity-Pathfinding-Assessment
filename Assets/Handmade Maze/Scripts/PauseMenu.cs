@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
     }
 
-    public void LoadMenu() // though this is gonna cause a bug...
+    public void LoadMenu() // though this is gonna cause a bug, why cause it will null everything on the next time you load the scene
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
