@@ -3,48 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+namespace UIElements
 {
-    public static bool isPaused = false;
-
-    public GameObject pausemenuUI;
-
-    private void Update()
+    public class PauseMenu : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        public static bool isPaused = false;
+
+        public GameObject pausemenuUI;
+
+        private void Update()
         {
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
-            }
-            else
-            {
-                Pause();
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
         }
-    }
 
-    public void Resume()
-    {
-        pausemenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
-    }
+        public void Resume()
+        {
+            pausemenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
 
-    void Pause()
-    {
-        pausemenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
-    }
+        void Pause()
+        {
+            pausemenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
 
-    public void LoadMenu() // though this is gonna cause a bug, why cause it will null everything on the next time you load the scene
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
+        public void LoadMenu() // though this is gonna cause a bug, why cause it will null everything on the next time you load the scene
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

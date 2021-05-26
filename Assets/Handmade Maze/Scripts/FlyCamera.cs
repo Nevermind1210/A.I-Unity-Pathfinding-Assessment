@@ -1,59 +1,62 @@
 using System.Collections;
 using UnityEngine;
 
-public class FlyCamera : MonoBehaviour
+namespace Controller
 {
-    public float cameraSensitivity = 90;
-    public float climbSpeed = 4;
-    public float normalMovespeed = 10;
-    public float slowMoveFactor = 0.25f;
-    public float fastMoveFactor = 3;
-
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
-
-    private void Start()
+    public class FlyCamera : MonoBehaviour
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+        public float cameraSensitivity = 90;
+        public float climbSpeed = 4;
+        public float normalMovespeed = 10;
+        public float slowMoveFactor = 0.25f;
+        public float fastMoveFactor = 3;
 
-    private void Update()
-    {
-        rotationX += Input.GetAxis("Mouse X") * cameraSensitivity * Time.deltaTime;
-        rotationY += Input.GetAxis("Mouse Y") * cameraSensitivity * Time.deltaTime;
+        private float rotationX = 0.0f;
+        private float rotationY = 0.0f;
 
-        transform.localRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
-        transform.localRotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
-
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        private void Start()
         {
-            transform.position += transform.forward * (normalMovespeed * fastMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * (normalMovespeed * fastMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey (KeyCode.RightControl))
-        {
-            transform.position += transform.forward * (normalMovespeed * slowMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * (normalMovespeed * slowMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
-        }
-        else
-        {
-            transform.position += transform.forward * (normalMovespeed * normalMovespeed) * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * (normalMovespeed * normalMovespeed) * Input.GetAxis("Horizontal") * Time.deltaTime;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if(Input.GetKey (KeyCode.Q)) { transform.position += transform.up * climbSpeed * Time.deltaTime;}
-        if(Input.GetKey (KeyCode.E)) { transform.position += transform.up * climbSpeed * Time.deltaTime;}
-
-        if(Input.GetKeyDown (KeyCode.End))
+        private void Update()
         {
-            if (Cursor.visible == true)
+            rotationX += Input.GetAxis("Mouse X") * cameraSensitivity * Time.deltaTime;
+            rotationY += Input.GetAxis("Mouse Y") * cameraSensitivity * Time.deltaTime;
+
+            transform.localRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
+            transform.localRotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
+
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                Cursor.lockState = CursorLockMode.None;
+                transform.position += transform.forward * (normalMovespeed * fastMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
+                transform.position += transform.right * (normalMovespeed * fastMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
             }
-            else if(Cursor.visible == false)
+            else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey (KeyCode.RightControl))
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                transform.position += transform.forward * (normalMovespeed * slowMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
+                transform.position += transform.right * (normalMovespeed * slowMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += transform.forward * (normalMovespeed * normalMovespeed) * Input.GetAxis("Vertical") * Time.deltaTime;
+                transform.position += transform.right * (normalMovespeed * normalMovespeed) * Input.GetAxis("Horizontal") * Time.deltaTime;
+            }
+
+            if(Input.GetKey (KeyCode.Q)) { transform.position += transform.up * climbSpeed * Time.deltaTime;}
+            if(Input.GetKey (KeyCode.E)) { transform.position += transform.up * climbSpeed * Time.deltaTime;}
+
+            if(Input.GetKeyDown (KeyCode.End))
+            {
+                if (Cursor.visible == true)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else if(Cursor.visible == false)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
         }
     }
