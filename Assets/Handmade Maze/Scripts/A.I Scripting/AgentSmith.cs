@@ -44,6 +44,11 @@ namespace AI
             {
                 _anim.SetTrigger("Idle");
             }
+            
+            if (agent.isPathStale)
+            {
+                agent.SetDestination(RandomPoint.Position);
+            }
                 
             if (agent.isOnOffMeshLink)
             {
@@ -52,6 +57,20 @@ namespace AI
                     _anim.SetTrigger("Jump");
                 }
                 
+            }
+        }
+        
+        void OnDrawGizmosSelected()
+        {
+            if (agent != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(agent.destination, 1f);
+                
+                Gizmos.DrawLine(transform.position, agent.destination);
+                
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(agent.steeringTarget, 1f);
             }
         }
     }
