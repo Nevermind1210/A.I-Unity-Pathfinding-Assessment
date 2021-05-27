@@ -33,8 +33,11 @@ namespace AI
             // Has the agent reached it's position?
             if (!agent.pathPending && agent.remainingDistance < 0.1f)
             {
-                // Tell the agent to move to a random position in the scene waypoints
-                agent.SetDestination(RandomPoint.Position);
+               
+                if (!agent.hasPath) // Tell the agent if the path is not reachable then find another waypoint that HAS a path
+                {
+                    agent.SetDestination(RandomPoint.Position);
+                }
                 _anim.SetTrigger("Walk");
             }
             else if(waypoints == null)
